@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="UnattendedHostPersistenceState">
+    <option name="openedFilesInfos">
+      <list>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="65" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/db:" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="567" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/src/Entity/Invoice.php" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="711" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/src/Entity/Project.php" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="671" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/src/Entity/Material.php" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="0" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/src/Entity/Request.php" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="775" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/src/Entity/User.php" />
+        </OpenedFileInfo>
+      </list>
+    </option>
+  </component>
+</project>

@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'Invoice' }}{% endblock %}
+
+{% block body %}
+    <div class="row ">
+        <div class="col-12 grid-margin">
+            <button type="button" class="btn btn-outline-primary mdi mdi-plus-circle">{{ 'Add invoice' }}</button>
+            <div class="card card-body">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>{{ '#' }}</th>
+                        <th>{{ 'Client Name' }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {# {% for change in changes %} #}
+                    <tr>
+                        <td>{{ '$' }}</td>
+                        <td>{{ '$' }}</td>
+                    </tr>
+                    {# {% endfor %} #}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
