@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\InvoiceV2Repository;
+use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -34,9 +35,9 @@ class InvoiceV2
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="invoices")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    private $user_id;
+    private $user;
 
     public function getId(): ?int
     {
@@ -79,14 +80,17 @@ class InvoiceV2
         return $this;
     }
 
-    public function getUserId(): ?User
+    /**
+     * @return mixed
+     */
+    public function getUser(): ?User
     {
-        return $this->user_id;
+        return $this->user;
     }
 
-    public function setUserId(?User $user_id): self
+    public function setUser(User $user)
     {
-        $this->user_id = $user_id;
+        $this->user = $user;
 
         return $this;
     }

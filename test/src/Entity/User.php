@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use App\Entity\InvoiceV2;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -231,5 +232,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->status = $status;
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLastNameWithInitials()
+    {
+        $firstName = mb_substr($this->getFirstname(), 0, 1) ? mb_substr($this->getFirstname(), 0, 1) . '.' : '';
+        return sprintf('%s %s', $this->getLastname(), $firstName);
     }
 }

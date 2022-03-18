@@ -28,9 +28,10 @@
                         {% for invoice in invoices %}
                             <tr>
                                 <td>{{ loop.index }}</td>
-                                <td>{{ invoice.number_invoice }}</td>
+                                <td>{{ invoice.numberInvoice }}</td>
                                 <td>{{ invoice.amount }}</td>
-                                <td>{{ invoice.createDate | date }}</td>
+                                <td>{{ invoice.createDate | date('Y/m/d') }}</td>
+                                <td>{{ invoice.getuser.lastNameWithInitials }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>

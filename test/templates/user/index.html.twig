@@ -23,7 +23,7 @@
                                 <td>{{ loop.index }}</td>
                                 <td>{{ user.firstName }}</td>
                                 <td>{{ user.lastName }}</td>
-                                <td>{{ user.birth_date }}</td>
+                                <td>{{ user.birthDate | date('Y/m/d') }}</td>
                                 <td>{{ user.status }}</td>
                             </tr>
                         {% endfor %}
