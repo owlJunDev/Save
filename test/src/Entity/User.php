@@ -14,6 +14,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    const USER_STATUS_ACTIVE = 'active';
+    const USER_STATUS_INACTIVE = 'inactive';
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -52,8 +55,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $invoices;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $birthDate;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $status;
+
     public function __construct()
     {
+        $this->status = self::USER_STATUS_ACTIVE;
         $this->invoices = new ArrayCollection();
     }
 
@@ -191,6 +205,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $invoice->setUserId(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getBirthDate(): ?\DateTimeInterface
+    {
+        return $this->birthDate;
+    }
+
+    public function setBirthDate(?\DateTimeInterface $birthDate): self
+    {
+        $this->birthDate = $birthDate;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

@@ -14,8 +14,9 @@ class InvoiceController extends AbstractController
      */
     public function index(): Response
     {
+        $invoice = $this->getDoctrine()->getRepository(InvoiceV2::class)->findAll(); 
         return $this->render('invoice/index.html.twig', [
-            'controller_name' => 'InvoiceController',
+            'invoices' => $invoice,
         ]);
     }
 }

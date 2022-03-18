@@ -25,15 +25,14 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {# {% for change in changes %} #}
-                    <tr>
-                        <td>{{ '' }}</td>
-                        <td>{{ '' }}</td>
-                        <td>{{ '' }}</td>
-                        <td>{{ '' }}</td>
-                        <td>{{ '' }}</td>
-                    </tr>
-                    {# {% endfor %} #}
+                        {% for invoice in invoices %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ invoice.number_invoice }}</td>
+                                <td>{{ invoice.amount }}</td>
+                                <td>{{ invoice.createDate | date }}</td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
