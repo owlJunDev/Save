@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Invoice;
+use App\Entity\InvoiceV2;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Invoice|null find($id, $lockMode = null, $lockVersion = null)
- * @method Invoice|null findOneBy(array $criteria, array $orderBy = null)
- * @method Invoice[]    findAll()
- * @method Invoice[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method InvoiceV2|null find($id, $lockMode = null, $lockVersion = null)
+ * @method InvoiceV2|null findOneBy(array $criteria, array $orderBy = null)
+ * @method InvoiceV2[]    findAll()
+ * @method InvoiceV2[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class InvoiceRepository extends ServiceEntityRepository
+class InvoiceV2Repository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Invoice::class);
+        parent::__construct($registry, InvoiceV2::class);
     }
 
     // /**
-    //  * @return Invoice[] Returns an array of Invoice objects
+    //  * @return InvoiceV2[] Returns an array of InvoiceV2 objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class InvoiceRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Invoice
+    public function findOneBySomeField($value): ?InvoiceV2
     {
         return $this->createQueryBuilder('i')
             ->andWhere('i.exampleField = :val')

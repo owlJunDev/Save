@@ -5,20 +5,33 @@
 {% block body %}
     <div class="row ">
         <div class="col-12 grid-margin">
-            <button type="button" class="btn btn-outline-primary mdi mdi-plus-circle">{{ 'Add invoice' }}</button>
+{#
+        <div class="example-wrapper row no=gutters">
+			<a class="btn btn-success" data-toggle="modal" data-target="#add-file" style = "color:black">add image</a>
+		</div>
+
+ #}
+
+            <button type="button" data-toggle="modal" data-target="#modal" class="btn btn-outline-primary mdi mdi-plus-circle">{{ 'Add invoice' }}</button>
             <div class="card card-body">
                 <table class="table table-bordered">
                     <thead>
                     <tr>
                         <th>{{ '#' }}</th>
-                        <th>{{ 'Client Name' }}</th>
+                        <th>{{ 'Nomber Invoice' }}</th>
+                        <th>{{ 'Amount' }}</th>
+                        <th>{{ 'Date create' }}</th>
+                        <th>{{ 'Owner' }}</th>
                     </tr>
                     </thead>
                     <tbody>
                     {# {% for change in changes %} #}
                     <tr>
-                        <td>{{ '$' }}</td>
-                        <td>{{ '$' }}</td>
+                        <td>{{ '' }}</td>
+                        <td>{{ '' }}</td>
+                        <td>{{ '' }}</td>
+                        <td>{{ '' }}</td>
+                        <td>{{ '' }}</td>
                     </tr>
                     {# {% endfor %} #}
                     </tbody>
@@ -26,4 +39,25 @@
             </div>
         </div>
     </div>
+
 {% endblock %}
+    {% block modal %}
+        <h4 class="card-title">{{ 'Add invoice' }}</h4>
+        <div class="form-group">
+            <label for="exampleInputUsername1">{{ 'Number Invoice' }}</label>
+            <input type="text" class="form-control" id="exampleInputUsername1" placeholder="Number Invoice">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">{{ 'Amount' }}</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Amount">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1"> {{ 'Owner' }} </label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Owner">
+        </div>
+
+        <form {# action="{{ path('addIm') }}" #} method="post" enctype="multipart/form-data">
+            <button class="btn btn-primary">Cancel</button>
+            <button type="submit" class="btn btn-primary mr-20">Submit</button>
+        </form>
+    {% endblock %}
