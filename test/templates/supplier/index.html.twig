@@ -3,16 +3,7 @@
 {% block title %}Home{% endblock %}
 
 {% block body %}
-    <div class="row">
-        <div class="col-lg-6 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Doughnut chart</h4>
-                    <canvas id="doughnutChart" style="height:250px"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <div class="row ">
         <div class="col-12 grid-margin">
             <button type="button" class="btn btn-outline-primary mdi mdi-plus-circle">{{ 'Add' }}</button>
@@ -21,15 +12,29 @@
                     <thead>
                     <tr>
                         <th> #</th>
-                        <th>{{ 'Client Name' }}</th>
+                        <th>{{ 'Title Company' }}</th>
+                        <th>{{ 'First name' }}</th>
+                        <th>{{ 'Last name' }}</th>
+                        <th>{{ 'Second name' }}</th>
+                        <th>{{ 'Status' }}</th>
+                        <th>{{ 'ITN' }}</th>
+                        <th>{{ 'Email' }}</th>
+                        <th>{{ 'Phone' }}</th>
                     </tr>
                     </thead>
                     <tbody>
                     {# {% for change in changes %} #}
                     <tr>
                         {# <td>{{ loop.index }}</td> #}
-                        <td>{{ '$' }}</td>
-                        <td>{{ '$' }}</td>
+                        <td>{{ '' }}</td>
+                        <td>{{ '' }}</td>
+                        <td>{{ '' }}</td>
+                        <td>{{ '' }}</td>
+                        <td>{{ '' }}</td>
+                        <td>{{ '' }}</td>
+                        <td>{{ '' }}</td>
+                        <td>{{ '' }}</td>
+                        <td>{{ '' }}</td>
                     </tr>
                     {# {% endfor %} #}
                     </tbody>
