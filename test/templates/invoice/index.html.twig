@@ -5,23 +5,16 @@
 {% block body %}
     <div class="row ">
         <div class="col-12 grid-margin">
-{#
-        <div class="example-wrapper row no=gutters">
-			<a class="btn btn-success" data-toggle="modal" data-target="#add-file" style = "color:black">add image</a>
-		</div>
-
- #}
-
-            <button type="button" data-toggle="modal" data-target="#modal" class="btn btn-outline-primary mdi mdi-plus-circle">{{ 'Add invoice' }}</button>
+            <button type="button" data-toggle="modal" data-target="#modal" class="btn btn-outline-primary mdi mdi-plus-circle">{{ 'Добавить счёт' }}</button>
             <div class="card card-body">
                 <table class="table table-bordered">
                     <thead>
                     <tr>
                         <th>{{ '#' }}</th>
-                        <th>{{ 'Nomber Invoice' }}</th>
-                        <th>{{ 'Amount' }}</th>
-                        <th>{{ 'Date create' }}</th>
-                        <th>{{ 'Owner' }}</th>
+                        <th>{{ 'Номер счёта' }}</th>
+                        <th>{{ 'Средства счёта' }}</th>
+                        <th>{{ 'Дата создания' }}</th>
+                        <th>{{ 'Владелец счёта' }}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -41,29 +34,29 @@
     </div>
 
 {% endblock %}
-    {% block modal %}
-        <h4 class="card-title">{{ 'Add invoice' }}</h4>
-        <form action="{{ path('add_invoice') }}" method="post" enctype="multipart/form-data">
+{% block modal %}
+    <h4 class="card-title">{{ 'Добавить счёт' }}</h4>
+    <form action="{{ path('add_invoice') }}" method="post" enctype="multipart/form-data">
 
-            <div class="form-group">
-                <label for="exampleInputUsername">{{ 'Number Invoice' }}</label>
-                <input type="text" required class="form-control" name="invoice[numberInvoice]" placeholder="Number Invoice">
-            </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1">{{ 'Amount' }}</label>
-                <input type="text" required class="form-control" name="invoice[amount]" placeholder="Amount">
-            </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1"> {{ 'Owner' }} </label>
-                <select class="form-control form-control-sm" name="invoice[owner]">
+        <div class="form-group">
+            <label>{{ 'Номер счёта' }}</label>
+            <input type="text" required class="form-control" name="invoice[numberInvoice]">
+        </div>
+        <div class="form-group">
+            <label>{{ 'Средства счёта' }}</label>
+            <input type="number" required class="form-control" name="invoice[amount]">
+        </div>
+        <div class="form-group">
+            <label>{{ 'Владелец счёта' }} </label>
+                <select class="form-control js-example-basic-single" style="width:100%" required name="invoice[owner]">
+                    <option value="">{{ 'Выберите владельца счёта' }}</option>
                     {% for user in users %}
                         <option value="{{ user.id }}">{{ user.lastNameWithInitials }}</option>
                     {% endfor %}
-
                 </select>
-            </div>
+        </div>
 
-            <button class="btn btn-primary" data-dismiss="modal">{{ 'Cancel' }}</button>
-            <button type="submit" href = "#" class="btn btn-primary mr-20">{{ 'Add' }}</button>
-        </form>
-    {% endblock %}
+        <button class="btn btn-primary" data-dismiss="modal">{{ 'Отменить' }}</button>
+        <button type="submit" href = "#" class="btn btn-primary mr-20">{{ 'Добавить' }}</button>
+    </form>
+{% endblock %}

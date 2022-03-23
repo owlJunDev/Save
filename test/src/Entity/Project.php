@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProjectRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,6 +12,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Project
 {
+    CONST STATUS_NEW = 0;
+    CONST STATUS_IN_WORK = 1;
+    CONST STATUS_ARCHIV = 2;
+    CONST STATUS_END = 3;
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -46,6 +52,24 @@ class Project
      * @ORM\Column(type="integer")
      */
     private $price_Fact;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Member::class, mappedBy="project")
+     */
+    private $members;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="projects")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $owner;
+
+    public function __construct()
+    {
+        // $this->status = self::STATUS_NEW;
+        $this->price_Fact = 0;
+        $this->members = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -120,6 +144,48 @@ class Project
     public function setPriceFact(int $price_Fact): self
     {
         $this->price_Fact = $price_Fact;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Member>
+     */
+    public function getMembers(): Collection
+    {
+        return $this->members;
+    }
+
+    public function addMember(Member $member): self
+    {
+        if (!$this->members->contains($member)) {
+            $this->members[] = $member;
+            $member->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMember(Member $member): self
+    {
+        if ($this->members->removeElement($member)) {
+            // set the owning side to null (unless already changed)
+            if ($member->getProject() === $this) {
+                $member->setProject(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?User $owner): self
+    {
+        $this->owner = $owner;
 
         return $this;
     }

@@ -10,6 +10,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class SupplierV2
 {
+
+    const STATUS_INACTIVE = 0;
+    const STATUS_CHECKED = 1;
+    const STATUS_ACTIVE = 2;
+    const STATUS_BLACK_LIST = 3;
+
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -35,7 +42,7 @@ class SupplierV2
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $status;
+    private $status = self::STATUS_INACTIVE;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -55,7 +62,7 @@ class SupplierV2
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $title_company;
+    private $titleCompany;
 
     public function getId(): ?int
     {
@@ -148,13 +155,20 @@ class SupplierV2
 
     public function getTitleCompany(): ?string
     {
-        return $this->title_company;
+        return $this->titleCompany;
     }
 
-    public function setTitleCompany(?string $title_company): self
+    public function setTitleCompany(?string $titleCompany): self
     {
-        $this->title_company = $title_company;
+        $this->titleCompany = $titleCompany;
 
         return $this;
+    }
+
+    public function getLastNameWithInitials()
+    {
+        $firstName = mb_substr($this->getFirstname(), 0, 1) ? mb_substr($this->getFirstname(), 0, 1) . '.' : '';
+        $secondname = mb_substr($this->getSecondname(), 0, 1) ? mb_substr($this->getSecondname(), 0, 1) : '';
+        return sprintf('%s %s', $this->getLastname(), $firstName, $secondname);
     }
 }
