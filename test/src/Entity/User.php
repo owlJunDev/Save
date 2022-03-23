@@ -15,8 +15,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    const USER_STATUS_ACTIVE = 'active';
-    const USER_STATUS_INACTIVE = 'inactive';
+    const USER_STATUS_INACTIVE = 0;
+    const USER_STATUS_ACTIVE = 1;
 
     /**
      * @ORM\Id
@@ -62,14 +62,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $birthDate;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer", length=255)
      */
     private $status;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Project::class, mappedBy="owner")
+     */
+    private $projects;
 
     public function __construct()
     {
         $this->status = self::USER_STATUS_ACTIVE;
         $this->invoices = new ArrayCollection();
+        $this->projects = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -192,7 +198,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->invoices->contains($invoice)) {
             $this->invoices[] = $invoice;
-            $invoice->setUserId($this);
+            $invoice->setUser($this);
         }
 
         return $this;
@@ -202,8 +208,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->invoices->removeElement($invoice)) {
             // set the owning side to null (unless already changed)
-            if ($invoice->getUserId() === $this) {
-                $invoice->setUserId(null);
+            if ($invoice->getUser() === $this) {
+                $invoice->setUser(null);
             }
         }
 
@@ -234,12 +240,47 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getLastNameWithInitials()
     {
-        $firstName = mb_substr($this->getFirstname(), 0, 1) ? mb_substr($this->getFirstname(), 0, 1) . '.' : '';
+        $firstName = mb_substr($this->getFirstname(), 0, 1) ? mb_substr($this->getFirstname(), 0, 1) : '';
         return sprintf('%s %s', $this->getLastname(), $firstName);
+    }
+
+    public function getTitleStatus() 
+    {
+        return [
+            self::USER_STATUS_ACTIVE => 'активен',
+            self::USER_STATUS_INACTIVE => 'не активный'
+        ];
+    }
+
+    /**
+     * @return Collection<int, Project>
+     */
+    public function getProjects(): Collection
+    {
+        return $this->projects;
+    }
+
+    public function addProject(Project $project): self
+    {
+        if (!$this->projects->contains($project)) {
+            $this->projects[] = $project;
+            $project->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProject(Project $project): self
+    {
+        if ($this->projects->removeElement($project)) {
+            // set the owning side to null (unless already changed)
+            if ($project->getOwner() === $this) {
+                $project->setOwner(null);
+            }
+        }
+
+        return $this;
     }
 }

@@ -5,10 +5,10 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\InvoiceV2;
 use App\Entity\User;
-use DateTime;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class InvoiceController extends AbstractController
 {
@@ -19,6 +19,7 @@ class InvoiceController extends AbstractController
     {
         $invoices = $this->getDoctrine()->getRepository(InvoiceV2::class)->findAll(); 
         $users = $this->getDoctrine()->getRepository(User::class)->findAll(); 
+
         return $this->render('invoice/index.html.twig', [
             'invoices' => $invoices,
             'users' => $users,
@@ -28,12 +29,9 @@ class InvoiceController extends AbstractController
     /**
      * @Route("/add-invoice", name="add_invoice")
      */ 
-    public function addInvoice(Request $request):Response
+    public function addInvoice(Request $request)
     {
         $invoiceDetails = $request->get('invoice');
-
-        $flashbag = $this->get('session')->getFlashBag();
-        $flashbag->clear();
         
         $em = $this->getDoctrine()->getManager();
 
@@ -53,6 +51,7 @@ class InvoiceController extends AbstractController
         ;
         $em->persist($invoice);
         $em->flush();
+
         return $this->redirect($request->headers->get('referer'));
     }
 }

@@ -6,32 +6,61 @@
 
     <div class="row ">
         <div class="col-12 grid-margin">
-            <button type="button" class="btn btn-outline-primary mdi mdi-plus-circle">{{ 'Add' }}</button>
+            <button type="button" data-toggle="modal" data-target="#modal" class="btn btn-outline-primary mdi mdi-plus-circle">{{ 'Добавить продукт' }}</button>
             <div class="card card-body">
                 <table class="table table-bordered">
                     <thead>
                     <tr>
-                        <th> #</th>
-                        <th>{{ 'Code' }}</th>
-                        <th>{{ 'Title' }}</th>
-                        <th>{{ 'Unit' }}</th>
-                        <th>{{ 'Qty' }}</th>
+                        <th>#</th>
+                        <th>{{ 'Код' }}</th>
+                        <th>{{ 'Название' }}</th>
+                        <th>{{ 'Единица измерения' }}</th>
+                        <th>{{ 'Количество' }}</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {# {% for change in changes %} #}
-                    <tr>
-                        {# <td>{{ loop.index }}</td> #}
-                        <td>{{ '' }}</td>
-                        <td>{{ '' }}</td>
-                        <td>{{ '' }}</td>
-                        <td>{{ '' }}</td>
-                        <td>{{ '' }}</td>
-                    </tr>
-                    {# {% endfor %} #}
+                        {% for material in materials %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ material.code }}</td>
+                                <td>{{ material.title }}</td>
+                                <td>{{ material.unit.title }}</td>
+                                <td>{{ material.qty }}</td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+{% endblock %}
+{% block modal %}
+    <h4 class="card-title">{{ 'Добавить продукт' }}</h4>
+    <form action="{{ path('add_material') }}" method="post" enctype="multipart/form-data">
+
+        <div class="form-group">
+            <label>{{ 'Код' }}</label>
+            <input type="text" required class="form-control" name="material[code]" placeholder="Код">
+        </div>
+        <div class="form-group">
+            <label>{{ 'Наименованеие' }}</label>
+            <input type="text" required class="form-control" name="material[title]" placeholder="Наименованеие">
+        </div>
+        <div class="form-group">
+            <label>{{ 'Единица измерения' }}</label>
+            <select required class="form-control js-example-basic-single" style="width:100%" name="material[unit]">
+                <option value="">{{ 'Выберите единицу измерения' }}</option>
+                {% for unit in units %}
+                    <option value="{{ unit.id }}">{{ unit.title }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label>{{ 'Количество' }}</label>
+            <input type="text" required class="form-control" name="material[qty]" placeholder="Количество">
+        </div>
+
+        <button class="btn btn-primary" data-dismiss="modal">{{ 'Отменить' }}</button>
+        <button type="submit" href = "#" class="btn btn-primary mr-20">{{ 'Добавить' }}</button>
+    </form>
 {% endblock %}

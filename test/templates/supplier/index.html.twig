@@ -4,42 +4,82 @@
 
 {% block body %}
 
-    <div class="row ">
+    <div class="row">
         <div class="col-12 grid-margin">
-            <button type="button" class="btn btn-outline-primary mdi mdi-plus-circle">{{ 'Add' }}</button>
-            <div class="card card-body">
-                <table class="table table-bordered">
+            <button type="button" data-toggle="modal" data-target="#modal" class="btn btn-outline-primary mdi mdi-plus-circle">{{ 'Добавить контрагента' }}</button>
+            <div class="card card-bordered">
+                <table class="table table-dark scroll">
                     <thead>
                     <tr>
                         <th> #</th>
-                        <th>{{ 'Title Company' }}</th>
-                        <th>{{ 'First name' }}</th>
-                        <th>{{ 'Last name' }}</th>
-                        <th>{{ 'Second name' }}</th>
-                        <th>{{ 'Status' }}</th>
-                        <th>{{ 'ITN' }}</th>
-                        <th>{{ 'Email' }}</th>
-                        <th>{{ 'Phone' }}</th>
+                        <th>{{ 'Название компании' }}</th>
+                        <th>{{ 'ФИО' }}</th>
+                        <th>{{ 'ИНН' }}</th>
+                        <th>{{ 'Почта' }}</th>
+                        <th>{{ 'Телефон' }}</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {# {% for change in changes %} #}
-                    <tr>
-                        {# <td>{{ loop.index }}</td> #}
-                        <td>{{ '' }}</td>
-                        <td>{{ '' }}</td>
-                        <td>{{ '' }}</td>
-                        <td>{{ '' }}</td>
-                        <td>{{ '' }}</td>
-                        <td>{{ '' }}</td>
-                        <td>{{ '' }}</td>
-                        <td>{{ '' }}</td>
-                        <td>{{ '' }}</td>
-                    </tr>
-                    {# {% endfor %} #}
+                        {% for supplier in suppliers %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ supplier.titleCompany }}</td>
+                                <td>{{ supplier.lastNameWithInitials }}</td>
+                                <td>{{ supplier.itn }}</td>
+                                <td>{{ supplier.email }}</td>
+                                <td>{{ supplier.phone }}</td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+{% endblock %}
+{% block modal %}
+    <h4 class="card-title">{{ 'Добавить контрагента' }}</h4>
+    <form action="{{ path('add_supplier') }}" method="post" enctype="multipart/form-data">
+        
+        <div class="form-group">
+            <label>{{ 'Название компании' }}</label>
+            <input type="text" required class="form-control" name="supplier[titleCompany]">
+        </div>
+
+        <div class="form-group row">       
+            <div class="col">
+                <label>{{ 'Фамилия' }}</label>
+                <input type="text" required class="form-control" name="supplier[lastName]">
+            </div>
+            <div class="col">
+                <label>{{ 'Имя' }}</label>
+                <input type="text" required class="form-control" name="supplier[firstName]">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col">
+                <label>{{ 'Отчество' }}</label>
+                <input type="text" required class="form-control" name="supplier[secondName]">
+            </div>
+            <div class="col">
+                <label>{{ 'ИНН' }}</label>
+                <input type="text" required class="form-control" name="supplier[itn]">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col">
+                <label>{{ 'Почта' }}</label>
+                <input type="email" required class="form-control" name="supplier[email]">
+            </div>
+            <div class="col">
+                <label>{{ 'Телефон' }}</label>
+                <input type="tel" required class="form-control" name="supplier[phone]">
+            </div>
+        </div>
+
+
+        <button class="btn btn-primary" data-dismiss="modal">{{ 'Отменить' }}</button>
+        <button type="submit" href = "#" class="btn btn-primary mr-20">{{ 'Добавить' }}</button>
+    </form>
 {% endblock %}

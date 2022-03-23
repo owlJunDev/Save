@@ -32,6 +32,11 @@ class MaterialV2
      */
     private $qty;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Unit::class, inversedBy="material")
+     */
+    private $unit;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +74,18 @@ class MaterialV2
     public function setQty(int $qty): self
     {
         $this->qty = $qty;
+
+        return $this;
+    }
+
+    public function getUnit(): ?Unit
+    {
+        return $this->unit;
+    }
+
+    public function setUnit(?Unit $unit): self
+    {
+        $this->unit = $unit;
 
         return $this;
     }
