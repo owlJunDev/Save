@@ -1,37 +1,39 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Home{% endblock %}
+{% block title %}{{ 'Контрагенты' }}{% endblock %}
 
 {% block body %}
 
     <div class="row">
         <div class="col-12 grid-margin">
             <button type="button" data-toggle="modal" data-target="#modal" class="btn btn-outline-primary mdi mdi-plus-circle">{{ 'Добавить контрагента' }}</button>
-            <div class="card card-bordered">
-                <table class="table table-dark scroll">
-                    <thead>
-                    <tr>
-                        <th> #</th>
-                        <th>{{ 'Название компании' }}</th>
-                        <th>{{ 'ФИО' }}</th>
-                        <th>{{ 'ИНН' }}</th>
-                        <th>{{ 'Почта' }}</th>
-                        <th>{{ 'Телефон' }}</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        {% for supplier in suppliers %}
-                            <tr>
-                                <td>{{ loop.index }}</td>
-                                <td>{{ supplier.titleCompany }}</td>
-                                <td>{{ supplier.lastNameWithInitials }}</td>
-                                <td>{{ supplier.itn }}</td>
-                                <td>{{ supplier.email }}</td>
-                                <td>{{ supplier.phone }}</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+            <div class="card card-body">
+                <div class="card card-bordered">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th> #</th>
+                            <th>{{ 'Название компании' }}</th>
+                            <th>{{ 'ФИО' }}</th>
+                            <th>{{ 'ИНН' }}</th>
+                            <th>{{ 'Почта' }}</th>
+                            <th>{{ 'Телефон' }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for supplier in suppliers %}
+                                <tr>
+                                    <td>{{ loop.index }}</td>
+                                    <td>{{ supplier.titleCompany }}</td>
+                                    <td>{{ supplier.lastNameWithInitials }}</td>
+                                    <td>{{ supplier.itn }}</td>
+                                    <td>{{ supplier.email }}</td>
+                                    <td>{{ supplier.phone }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

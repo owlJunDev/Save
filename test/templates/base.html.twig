@@ -18,7 +18,6 @@
         <link rel="stylesheet" href="assets/css/style.css">
         <!-- End layout styles -->
     {% endblock %}
-
 </head>
 <body>
 <div class="container-scroller">
@@ -31,59 +30,45 @@
             <li class="nav-item menu-items">
                 <a class="nav-link" href="{{ path('home') }}">
                     <span class="menu-icon"><i class="mdi mdi-elevation-decline"></i></span>
-                    <span class="menu-title">{{ 'Dashboard' }}</span>
+                    <span class="menu-title">{{ 'Обзор' }}</span>
                 </a>
             </li>
             <li class="nav-item menu-items">
                 <a class="nav-link" href="{{ path('invoice') }}">
                     <span class="menu-icon"><i class="mdi mdi-brightness-1 text-warning"></i></span>
-                    <span class="menu-title">{{ 'Invoice' }}</span>
+                    <span class="menu-title">{{ 'Счета' }}</span>
                 </a>
             </li>
             <li class="nav-item menu-items">
                 <a class="nav-link" href="{{ path('users') }}">
                     <span class="menu-icon"><i class="mdi mdi-account"></i></span>
-                    <span class="menu-title">{{ 'User' }}</span>
+                    <span class="menu-title">{{ 'Пользователи' }}</span>
                 </a>
             </li>
             <li class="nav-item menu-items">
                 <a class="nav-link" href="{{ path('material') }}">
                     <span class="menu-icon"><i class="mdi mdi-buffer"></i></span>
-                    <span class="menu-title">{{ 'Material' }}</span>
+                    <span class="menu-title">{{ 'Материалы' }}</span>
                 </a>
             </li>
             <li class="nav-item menu-items">
                 <a class="nav-link" href="{{ path('supplier') }}">
                     <span class="menu-icon"><i class="mdi mdi-cellphone-basic"></i></span>
-                    <span class="menu-title">{{ 'Supplier' }}</span>
+                    <span class="menu-title">{{ 'Контрагенты' }}</span>
                 </a>
             </li>
             <li class="nav-item menu-items">
                 <a class="nav-link" href="{{ path('project') }}">
                     <span class="menu-icon"><i class="mdi mdi-book"></i></span>
-                    <span class="menu-title">{{ 'Project' }}</span>
+                    <span class="menu-title">{{ 'Проект' }}</span>
                 </a>
             </li>
             <li class="nav-item menu-items">
                 <a class="nav-link" href="{{ path('request') }}">
                     <span class="menu-icon"><i class="mdi mdi-bulletin-board "></i></span>
-                    <span class="menu-title">{{ 'Request' }}</span>
+                    <span class="menu-title">{{ 'Заявки' }}</span>
                 </a>
             </li>
-            {#<li class="nav-item menu-items">
-                <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false"
-                   aria-controls="ui-basic">
-                    <span class="menu-title">Basic UI Elements</span>
-                    <i class="menu-arrow"></i>
-                </a>
-                <div class="collapse" id="ui-basic">
-                    <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"><a class="nav-link" href="">Buttons</a></li>
-                        <li class="nav-item"><a class="nav-link" href="">Dropdowns</a></li>
-                        <li class="nav-item"><a class="nav-link" href="">Typography</a></li>
-                    </ul>
-                </div>
-            </li>#}
         </ul>
     </nav>
     <div class="container-fluid page-body-wrapper">
@@ -134,16 +119,14 @@
 <div class="modal" id="modal">
     <div class="modal-dialog">
         <div class="modal-content">            
-            {# <div class="modal-body"> #}
-                <div class=" stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            {% block modal %}
-                            {% endblock %}
-                        </div>
+            <div class=" stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        {% block modal %}
+                        {% endblock %}
                     </div>
                 </div>
-            {# </div> #}
+            </div>
         </div>
     </div>
 </div>

@@ -64,11 +64,17 @@ class Project
      */
     private $owner;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Request::class, mappedBy="project")
+     */
+    private $requests;
+
     public function __construct()
     {
         // $this->status = self::STATUS_NEW;
         $this->price_Fact = 0;
         $this->members = new ArrayCollection();
+        $this->requests = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -186,6 +192,36 @@ class Project
     public function setOwner(?User $owner): self
     {
         $this->owner = $owner;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Request>
+     */
+    public function getRequests(): Collection
+    {
+        return $this->requests;
+    }
+
+    public function addRequest(Request $request): self
+    {
+        if (!$this->requests->contains($request)) {
+            $this->requests[] = $request;
+            $request->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRequest(Request $request): self
+    {
+        if ($this->requests->removeElement($request)) {
+            // set the owning side to null (unless already changed)
+            if ($request->getProject() === $this) {
+                $request->setProject(null);
+            }
+        }
 
         return $this;
     }

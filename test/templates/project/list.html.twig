@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Project{% endblock %}
+{% block title %}{{ 'Проекты' }}{% endblock %}
 
 {% block body %}
 
-    <div class="row ">
+    <div class="row">
         <div class="col-12 grid-margin">
-            <button type="button" data-toggle="modal" data-target="#modal" class="btn btn-outline-primary mdi mdi-plus-circle">{{ 'Add' }}</button>
+            <button type="button" data-toggle="modal" data-target="#modal" class="btn btn-outline-primary mdi mdi-plus-circle">{{ 'Добавить проект' }}</button>
             <div class="card card-body">
-                <table class="table table-bordered">
+                <table class="table">
                     <thead>
                     <tr>
                         <th>{{ '#' }}</th>
