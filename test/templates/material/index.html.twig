@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Material{% endblock %}
+{% block title %}{{ 'Материалы' }}{% endblock %}
 
 {% block body %}
 
@@ -8,7 +8,7 @@
         <div class="col-12 grid-margin">
             <button type="button" data-toggle="modal" data-target="#modal" class="btn btn-outline-primary mdi mdi-plus-circle">{{ 'Добавить продукт' }}</button>
             <div class="card card-body">
-                <table class="table table-bordered">
+                <table class="table">
                     <thead>
                     <tr>
                         <th>#</th>
@@ -35,7 +35,7 @@
     </div>
 {% endblock %}
 {% block modal %}
-    <h4 class="card-title">{{ 'Добавить продукт' }}</h4>
+    <h4 class="card-title">{{ 'Добавить материал' }}</h4>
     <form action="{{ path('add_material') }}" method="post" enctype="multipart/form-data">
 
         <div class="form-group">

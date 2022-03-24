@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\InvoiceV2Repository;
 use App\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -38,6 +40,16 @@ class InvoiceV2
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Request::class, mappedBy="invoice")
+     */
+    private $requests;
+
+    public function __construct()
+    {
+        $this->requests = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -91,6 +103,36 @@ class InvoiceV2
     public function setUser(User $user)
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Request>
+     */
+    public function getRequests(): Collection
+    {
+        return $this->requests;
+    }
+
+    public function addRequest(Request $request): self
+    {
+        if (!$this->requests->contains($request)) {
+            $this->requests[] = $request;
+            $request->setInvoice($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRequest(Request $request): self
+    {
+        if ($this->requests->removeElement($request)) {
+            // set the owning side to null (unless already changed)
+            if ($request->getInvoice() === $this) {
+                $request->setInvoice(null);
+            }
+        }
 
         return $this;
     }

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\MaterialV2Repository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,6 +38,16 @@ class MaterialV2
      * @ORM\ManyToOne(targetEntity=Unit::class, inversedBy="material")
      */
     private $unit;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Request::class, mappedBy="material")
+     */
+    private $requests;
+
+    public function __construct()
+    {
+        $this->requests = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -86,6 +98,36 @@ class MaterialV2
     public function setUnit(?Unit $unit): self
     {
         $this->unit = $unit;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Request>
+     */
+    public function getRequests(): Collection
+    {
+        return $this->requests;
+    }
+
+    public function addRequest(Request $request): self
+    {
+        if (!$this->requests->contains($request)) {
+            $this->requests[] = $request;
+            $request->setMaterial($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRequest(Request $request): self
+    {
+        if ($this->requests->removeElement($request)) {
+            // set the owning side to null (unless already changed)
+            if ($request->getMaterial() === $this) {
+                $request->setMaterial(null);
+            }
+        }
 
         return $this;
     }
