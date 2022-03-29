@@ -52,4 +52,10 @@ class SupplierController extends AbstractController
 
         return $this->redirect($request->headers->get('referer'));
     }
+
+    /**
+     * @Route("/send-ajax", name="lust_supplier")
+     */ 
+    public function sendAjax(Request $request)
+    {}
 }

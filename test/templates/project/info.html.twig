@@ -119,6 +119,25 @@
             </div>
         </div>
     </div>
+{# <script>    
+    function sendAjax() {
+        $.ajax({
+            url: "{{ path('lust_supplier') }}",
+            type: "POST",
+            data: material: $('.request-material').val()),
+            dataType: "json",
+            success: function(data) {
+                $('.request-supplier').val(data);
+            },
+        });
+    }
+    
+
+    $('#request-material').on('change', function() {
+        console.log('ffffffffffffffff');
+        alert('f');
+    });
+</script> #}
 {% endblock %}
 {% block modal %}
     <h4 class="card-title">{{ 'Добавить заявку' }}</h4>
@@ -135,23 +154,23 @@
             </select>
         </div>
         <div class="form-group">
-            <label>{{ 'Контрагент' }}</label>
-            <select class="form-control js-example-basic-single" style="width:100%" required name="request[supplierId]">
-                <option value="">{{ 'Выберите контрагента' }}</option>
-                {% for supplier in suppliers %}
-                    <option value="{{ supplier.id }}">{{ supplier.lastNameWithInitials }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <div class="form-group">
             <label>{{ 'Материал' }}</label>
-            <select class="form-control js-example-basic-single" style="width:100%" required name="request[materialId]">
+            <select class="form-control js-example-basic-single request-material" style="width:100%" required name="request[materialId]">
                 <option value="">{{ 'Выберите материал' }}</option>
                 {% for material in materials %}
                     <option value="{{ material.id }}">{{ material.title }}</option>
                 {% endfor %}
             </select>
         </div> 
+        <div class="form-group">
+            <label>{{ 'Контрагент' }}</label>
+            <select class="form-control js-example-basic-single request-supplier" style="width:100%" required name="request[supplierId]">
+                <option value="">{{ 'Выберите контрагента' }}</option>
+                {% for supplier in suppliers %}
+                    <option value="{{ supplier.id }}">{{ supplier.lastNameWithInitials }}</option>
+                {% endfor %}
+            </select>
+        </div>
         <div class="form-group">
             <label>{{ 'Кол-во' }}</label>
             <input type="number" required class="form-control" name="request[qty]">
@@ -164,4 +183,6 @@
         <button class="btn btn-primary" data-dismiss="modal">{{ 'Отменить' }}</button>
         <button type="submit" href = "#" class="btn btn-primary mr-20">{{ 'Добавить' }}</button>
     </form>
+    
 {% endblock %}
+
