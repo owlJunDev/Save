@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Request as EntityRequest;
 use App\Entity\SupplierV2;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -51,5 +52,17 @@ class SupplierController extends AbstractController
         $em->flush();
 
         return $this->redirect($request->headers->get('referer'));
+    }
+
+    /**
+     * @Route("/send-ajax", name="send_ajax")
+     */ 
+    public function sendAjax(Request $request)
+    {
+        $materialId = $request->get('data');
+        $requestId = $this->getDoctrine()->getRepository(EntityRequest::class)->findOneBy(['material' => $materialId]);
+        dump($materialId);
+        dump($requestId);
+        return new Response(empty($requestId)? null :$requestId->getId());
     }
 }
