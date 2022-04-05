@@ -1,0 +1,18 @@
+<div class="modal {{ class }}" id="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">            
+            <div class=" stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ title }}</h4>
+                        <form action="{{ formAction }}" method="post" enctype="multipart/form-data" id="{{ formId }}">
+                            {{ content }}
+                            <button class="btn btn-primary" data-dismiss="modal">{{ 'Отменить' }}</button>
+                            <button type="submit" href = "#" class="btn btn-primary mr-20">{{ submitTitle }}</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
